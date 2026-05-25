@@ -1,0 +1,32 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card card-cyber p-4">
+      <h2 class="text-neon-cyber mb-4 text-center">💱 CONVERSOR DE DIVISAS</h2>
+      <div class="mb-3">
+        <label class="form-label">Cantidad</label>
+        <input type="number" class="form-control bg-dark text-light border-neon" [(ngModel)]="cantidad">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">De (Moneda Origen)</label>
+        <select class="form-select bg-dark text-light border-neon" [(ngModel)]="origen">
+          <option value="USD">USD - Dólares EEUU</option>
+          <option value="EUR">EUR - Euros</option>
+          <option value="ARS">ARS - Pesos Argentinos</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label class="form-label">A (Moneda Destino)</label>
+        <select class="form-select bg-dark text-light border-neon" [(ngModel)]="destino">
+          <option value="ARS">ARS - Pesos Argentinos</option>
+          <option value="USD">USD - Dólares EEUU</option>
+          <option value="EUR">EUR - Euros</option>
+        </select>
+      </div>
+      <button class="btn btn-cyber-cyan w-100 py-2 mb-3" (click)="convertir()">Convertir</button>
+      
+      <div *ngIf="resultado" class="alert alert-info bg-black text-neon-cyber border-neon text-center fw-bold fs-4">
+        ✨ {{ cantidad }} {{ origen }} = {{ resultado | number:'1.2-2' }} {{ destino }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col-md-3" *ngFor="let m of marcas">
+    <button class="btn btn-primary m-2" (click)="verModelos(m)">{{ m }}</button>
+  </div>
+</div>
+
+<div class="modal" [style.display]="mostrarModal ? 'block' : 'none'" style="background: rgba(0,0,0,0.5)">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Modelos de {{ marcaActual }}</h5>
+        <button type="button" class="btn-close" (click)="mostrarModal = false"></button>
+      </div>
+      <div class="modal-body">
+        <ul>
+          <li *ngFor="let modelo of modelosSeleccionados">{{ modelo }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

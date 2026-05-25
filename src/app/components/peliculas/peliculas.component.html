@@ -1,0 +1,39 @@
+<div class="container py-4">
+  <h2 class="text-center mb-4">🎬 Top 100 Películas — IMDB</h2>
+  <div class="row mb-4">
+    <div class="col-md-6 mx-auto">
+      <input type="text" class="form-control" placeholder="🔍 Buscar película por título..." [(ngModel)]="textoBusqueda" (input)="filtrarPeliculas()">
+    </div>
+  </div>
+
+  <div *ngIf="cargando" class="text-center my-5">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p class="mt-2 text-muted">Cargando películas desde IMDB...</p>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger text-center">{{ error }}</div>
+
+  <p *ngIf="!cargando && !error" class="text-muted text-center mb-3">
+    Mostrando {{ peliculasFiltradas.length }} de {{ peliculas.length }} películas
+  </p>
+
+  <div *ngIf="!cargando && !error" class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let peli of peliculasFiltradas">
+      <div class="card h-100 shadow-sm">
+        <img [src]="peli.image" class="card-img-top" [alt]="peli.title" style="height: 280px; object-fit: cover;">
+        <div class="card-body">
+          <h6 class="card-title fw-bold">{{ peli.rank }}. {{ peli.title }}</h6>
+          <p class="text-muted small mb-1">📅 {{ peli.year }} | ⭐ {{ peli.rating }}</p>
+          <div class="mb-2">
+            <span class="badge bg-secondary me-1" *ngFor="let g of peli.genre">{{ g }}</span>
+          </div>
+          <p class="card-text small">{{ peli.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!cargando && !error && peliculasFiltradas.length === 0 && textoBusqueda" class="text-center mt-5">
+    <p class="text-muted">No hay películas con ese título. Probá con otra búsqueda.</p>
+  </div>
+</div>

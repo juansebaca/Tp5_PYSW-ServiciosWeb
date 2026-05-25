@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card card-cyber p-4">
+
+      <h2 class="text-neon-cyber mb-4 text-center">🎙️ TEXTO A VOZ</h2>
+
+      <div class="mb-3">
+        <label class="form-label text-light">Escribí el texto</label>
+        <textarea
+          class="form-control bg-dark text-light border-neon"
+          rows="4"
+          [(ngModel)]="texto"
+          placeholder="Escribí acá el texto que querés escuchar..."
+          maxlength="500">
+        </textarea>
+        <small class="text-muted">{{ texto.length }}/500 caracteres</small>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label text-light">Idioma</label>
+        <select class="form-select bg-dark text-light border-neon" [(ngModel)]="idiomaSeleccionado">
+          <option *ngFor="let i of idiomas" [value]="i.codigo">{{ i.nombre }}</option>
+        </select>
+      </div>
+
+      <div class="d-flex gap-2 mb-3">
+        <button
+          class="btn btn-cyber-pink flex-grow-1 py-2"
+          (click)="hablar()"
+          [disabled]="hablando || !texto.trim()">
+          {{ hablando ? '🔊 Reproduciendo...' : '▶️ Generar Voz' }}
+        </button>
+        <button
+          class="btn btn-outline-danger"
+          (click)="detener()"
+          [disabled]="!hablando">
+          ⏹ Detener
+        </button>
+        <button class="btn btn-outline-secondary" (click)="limpiar()">
+          🗑️ Limpiar
+        </button>
+      </div>
+
+      <div *ngIf="hablando" class="text-center text-info mt-2">
+        <small>🎙️ El navegador está leyendo el texto en voz alta...</small>
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger mt-3 text-center">
+        {{ error }}
+      </div>
+
+    </div>
+  </div>
+</div>
